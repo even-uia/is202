@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>IS-202 Lecture Notes</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="lecturenotes.css" />
+  </head>
+  <body>
+    <h1>IS-202 Lecture Notes</h1>
+    <hr />
+    <h2>Lecture 1: Web application overview</h2>
+    <p>You cannot write web applications if you do not know how the web works.
+      The world wide web (appreviated www or the web) was designed by Tim
+      Berners-Lee and Robert Cailliau in 1989. It was thought of as a system
+      where the researcher at CERN could share documents. </p>
+    <p>On a more technical level the web is a distributed system of interlinked
+      hypertext documents. There is no central server, each one of them exists
+      independently of the others.</p>
+    <p>Web clients, known as browsers, are used to access the documents on the
+      web: </p>
+    <ul>
+      <li>The browsers use the http protocol to communicate with the
+        servers.</li>
+      <li>The main document format on the web is html, though most browsers can
+        display many other document formats.</li>
+      <li>A way to create document links is a necessity for a hypertext system.
+        Document addresses on the use the url format.</li>
+    </ul>
+    <p>These 3 "standards": html, http and url are the foundations of the web,
+      and deserve more attention.</p>
+    <p>We will start with the hypertext transfer protocol because it is the
+      simplest of the three. Basically, the protocol is:</p>
+    <ol>
+      <li>The browser sends a request for a document identified by an url (the
+        url identifies the host (server) where the document is located).</li>
+      <li>The host responds with a message that contains the requested
+        document.</li>
+    </ol>
+    <p>The next section provide a more detailed description of http.</p>
+    
+    <h3>The HTTP protocol</h3>
+    <p>The HyperText Transfer Protocol defines the rules for communication be-
+    tween web servers and browsers. HTTP is an application level protocol: It
+    is built on top of a transport protocol such as tcp.</p>
+    <p>The communication is initiated by the browser when the user clicks on
+    a link, or types a URL:</p>
+ <ol><li>First the browser opens a TCP connection to the specified port on the
+    server. Strictly speaking this is not part of the HTTP protocol, but
+    the connection is needed to send any HTTP messages.</li>
+    <li>When the connection is established the browser sends an HTTP re-
+    quest message. There are several types of request messages. These are
+    described below.</li>
+    <li>The web server responds with an HTTP response message. The re-
+    sponse usually contains the requested resource, but it may also contain
+    error messages or other information. The resource is typically an html
+    document, or perhaps an image, but it can be any kind of data.</li>
+    <li>In the original version of the protocol the TCP connection was closed
+    after the response had been sent. Current web browsers and servers
+    will usually keep the connection open in anticipation of further requests
+    from the browser (for example to retrieve images linked to by a page).</li></ol>
+    
+    <h4>HTTP Requests</h4>
+    <p>The most common request is GET request, which is
+    used to retrieve resources, i.e. to follow links. The server’s response to GET
+    requests usually contains the requested resource in the message body, but
+    the server will send an error message instead if the resource is unavailable.
+    If you enter the URL http://www.uia.no/index.html in a browser, the
+    following request would be sent:</p>
+    
+    <code-example>GET /index.html HTTP/1.1</code-example>
+    
+    <p>Note that GET requests are meant to be used to retrieve information.
+    You should never use GET requests to perform irreversible actions, such as
+    placing an order, or charging the user’s credit card. The user should get
+    exactly the same result whether he clicks just once or several times on a
+    link. If you want to perform an action that makes an irreversible change
+    to the state of the system, you should use a form to send POST request
+    instead.</p>
+    <p>The POST request method is used to send data to the server (e.g. the
+    data entered in an HTML form - including fileuploads). The data is included 
+    in the body of the request. The server may use the data to add new resources,
+    or change existing ones.</p>
+    <p>The data is sent to the server as request parameters. Each parameter has
+    a name and a value. With POST requests, parameters are usually encoded
+    in the request body. Even GET requests can have parameters, but they do
+    not have a body, so any parameters must be encoded in the URL. We will
+    have a closer look at parameters in section TODO xref html</p>
+    <p>Web servers are only required to implement the GET and POST methods.
+      The other request methods are optional, and are rarely used, so we
+    will not go into them here.</p> 
+    
+
+    <h4>HTTP Responses</h4>
+    <p>The first line of the HTTP Response message contains a three-digit status
+      code:</p>
+    <ul>
+    <li>1xx codes are informational.</li>
+    <li>2xx status codes indicate successful processing of the request.</li>
+    <li>3xx status codes are used to redirect the browser to another URL.</li>
+    <li>4xx status codes indicate that something is wrong with the request. The
+    most common is probably
+    404 which is sent when the requested resource does not exist.</li>
+    <li>5xx status codes indicate a server error while processing the request.</li>
+</ul>
+
+<p>Depending on the status code the response message may contain additional data.
+  The most common status code is 200, which is used when a
+    request has been successfully processed, and the resources is being sent in
+    the response body.</p>
+    <p>The response message is handled by the browser, so we do not need to
+    go into more detail. Note however that 4xx and 5xx response will cause the
+    browser to display an error message with no link back to the application.
+    This is not very user friendly. Therefore you should always try to return a
+    normal page, even when something goes wrong in the handling of a request.
+    A page with a helpful message and links that allow the user to proceed is a
+    lot better than returning an error status.</p>
+    
+    <h4>The HyperText Markup Language</h4>
+    <p>The HyperText Markup Language (HTML) defines the main document
+    format of the web. If you want to write web applications you need to know
+    HTML. This document is not meant to be a full HTML tutorial. We will only show
+    how HTML can be used to provide input to web applications. For more
+    information about html you should look for the HTML specification and
+    tutorials on W3C’s website [W3C, ].</p>
+    <p></p> 
+  </body>
+</html>

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>IS-202 Lecture Notes</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="lecturenotes.css" />
+  </head>
+  <body>
+    <h1>IS-202 Lecture Notes</h1>
+    <hr />
+    <h2>Web application security</h2>
+    <p>Security in a web application can be many things, and the servlet
+      platform provides some of them:</p>
+    <dl>
+      <dt>Authentication (login)</dt>
+      <dd>This is how the application determines the identity of the users.
+        Logging in with a username and password is a common way of
+        authenticating users.</dd>
+      <dt>Authorization</dt>
+      <dd>The system checks what the users are allowed to do, and prevents them
+        doing anything else.</dd>
+      <dt>Privacy</dt>
+      <dd>The data in the system are only available to those who should have
+        access.</dd>
+    </dl>
+    <p>There are other aspects of security that are not offered by the platform.
+    Some can not be implmented in the technical system, such as making the users
+    securitu aware.</p>
+    
+    <h2>Enabling security measures</h2>
+    <p>No programming is needed to enable the security measures provided by
+      tomcat. They are already there. We just have to turn them on. To do that
+      we must add a few lines of xml code to <a href="webapps.html#web_xml">web.xml</a>.</p>
+    
+    <p>You must add one or more security-constraint tags, between the
+      session-config and welcome-file-list tags. It should look like this:
+      (This is not a complete
+      file, You will find complete exammples in the Secure* projects):</p>
+
+  <pre>
+&lt;session-config&gt; ... &lt;/session-config&gt;
+  &lt;security-constraint&gt;
+    &lt;web-resource-collection&gt;
+      What is protected
+    &lt;/web-resource-collection&gt;
+    &lt;auth-constraint&gt;
+      Who has access
+    &lt;/auth-constraint&gt;
+  &lt;/security-constraint&gt;
+  
+&lt;welcome-file-list&gt; ... &lt;/welcome-file-list&gt;
+</pre>
+      
+ <p>You can add more than one security-constraint tag, just add all of them
+      between the session-config and welcome-file-list tags.</p>
+      
+      <h3>The web-resource-collection</h3>
+      <p>The web-resource-collection tag specifies the pages that will be
+      protected, using url patterns. The possible url patterns are:</p>
+      <dl>
+      <dt>Prefix patterns:</dt>
+      <dd>matches urls that start with the specified string. For example the
+        pattern "/Student/*" will match the urls "Student/List", but not
+        "teacher.list"</dd>
+        <dt>Suffix patterns</dt>
+        <dd>matches urls that end with the specified string. The pattern
+          *.student will match all urls that end with ".student".</dd>
+      </dl>
+    <p>There is also a web-resource-name tag, that goes before the url pattern.
+      The name must be unique, but I don't think it is actually used anywhere.</p>
+    
+    
+    <h3>The auth-constraint</h3>
+    <p>The auth-constraint element contains a role-name tag for each role that
+      is allowed acces to the urls in the web-resource collection. This role 
+      must be declared, in a security-role element, after the last
+      security-constraint.</p>
+    
+    <h4>The login-config</h4>
+    <p>We have now seen that the security-constraint tag in web.xml changes the
+      behaviour of tomcat, so it will only allow users with specific roles to
+      use the protected pages/servlets. But how is roles assigned to the user?
+      In tomcat this is handled by a <a href="#realm">realm</a>.</p>
+    <p>The realm is specified with av login-config tag, after the security-role
+      tags.  A complete example of a security-constraint element, with comments
+      is shown below:</p>
+    
+    <div class="example">
+      <pre>
+&lt;!-- The first security-constraint allow users with either of the
+    RolodexUser or RolodexAdmin roles (which is all logged in users)
+    access to urls that start with "Show/" -- &gt;
+&lt;security-constraint&gt;
+    &lt;web-resource-collection&gt;
+        &lt;web-resource-name&gt;UserResources&lt;/web-resource-name&gt;
+        &lt;url-pattern&gt;/Show/*&lt;/url-pattern&gt;
+    &lt;/web-resource-collection&gt;
+    &lt;auth-constraint&gt;
+        &lt;role-name&gt;RolodexUser&lt;/role-name&gt;
+        &lt;role-name&gt;RolodexAdmin&lt;/role-name&gt;
+    &lt;/auth-constraint&gt;
+&lt;/security-constraint&gt;
+
+    &lt;!-- This security-constraints requires that the user is logged in
+    with the RolodexAdmin role, to get access to the urls that start
+    with "Admin/" --&gt;
+&lt;security-constraint&gt;
+    &lt;web-resource-collection&gt;
+        &lt;web-resource-name&gt;AdminResources&lt;/web-resource-name&gt;
+        &lt;url-pattern&gt;/Admin/*&lt;/url-pattern&gt;
+    &lt;/web-resource-collection&gt;
+    &lt;auth-constraint&gt;
+        &lt;role-name&gt;RolodexAdmin&lt;/role-name&gt;
+    &lt;/auth-constraint&gt;
+&lt;/security-constraint&gt;
+  
+&lt;!-- List of all roles --&gt;
+&lt;security-role&gt;
+    &lt;role-name&gt;RolodexUser&lt;/role-name&gt;
+&lt;/security-role&gt;
+&lt;security-role&gt;
+    &lt;role-name&gt;RolodexAdmin&lt;/role-name&gt;
+&lt;/security-role&gt;
+
+&lt;!-- The login-config tag determines how the user is
+    authenticated. BASIC means show a dialog asking for 
+    username and password.
+    The realm-name tag is a reference to a <a href="#realm">realm</a>, which is
+the subject of the next section. -- &gt;
+&lt;login-config&gt;
+    &lt;auth-method&gt;BASIC&lt;/auth-method&gt;
+    &lt;realm-name&gt;UserDatabaseRealm&lt;/realm-name&gt;
+&lt;/login-config&gt;
+      </pre>
+    </div>
+    
+    <h2 id="realm">Realms</h2>
+    <p>A realm in tomcat is a datase of usernames, password, and rolenames, for
+      all legitimate users of the system. We do not have to write any code. When
+      tomcat sees the security-constraint tags, it will automatically display a
+      login dialog, and check that the user enters the right password, and that
+      he has the required role. All we have to do is to tell tomcat which realm
+      to use, which is done with the realm-name tag in web.xml</p>
+    <p>In addition you may have to define the realm, which is also done with a
+    few lines of xml code</p>
+    
+    <h3>UserDatabaseRealm</h3>
+    <p>Tomcat's default realm is UserDatabaseRealm. It is defined in <a
+      href="webapps#server_xml">server.xml.</a>  The "database" is the file
+    <a href="webapps#tomcat-users_xml">tomcat-users.xml</a>. The only thing you
+      must do to use this realm (in addition to specifying UserDatabaseRealm with the
+      realm-name tag) is to add your users, with password and roles to that
+      file.  Keep in mind that tomcat's admin users are also defined in
+      tomcat-users.xml, so be careful when you edit it, and make a backup copy
+      so you can restore it if you get shut out of tomcat.</p>
+    
+    <h3>DatasourceRealm</h3>
+    <p>The DatasourceRealm is designed to get usernames, passwords and rolenames
+    from two database tables. The user table has a columns for the username and
+    password. The role table has columns for username and rolename. If a user
+    has several roles, there must be a row in the roletable for each role that
+    the user has.  The tables may have more columns than those mentioned here,
+    but they will not used by the realm.</p>
+    <p>DatasourceRealm must be configured before we can use it. The following
+      information is needed: Database table and column names, and the datasource
+      name.  The realm is declared with a Realm tag:</p>
+      <div class="example">
+        <pre>
+&lt;Realm className="org.apache.catalina.realm.DataSourceRealm"
+    dataSourceName="jdbc/Rolodex" localDataSource="true"
+    userTable="users"  userNameCol="username" userCredCol="password"
+    userRoleTable="roles" roleNameCol="rolename" /&gt;
+</pre>
+      </div>
+      <p>The attributes should be self-explanatory. Note that both tables must
+        have a username column with the same name, which is why there is 
+        only one userNameCol attribute.</p>
+  </body>
+</html>

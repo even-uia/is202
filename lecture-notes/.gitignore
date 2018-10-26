@@ -1,0 +1,6 @@
+# Oxygen project files
+*.xpr
+
+# Netbeans project files
+build.xml
+nbproject

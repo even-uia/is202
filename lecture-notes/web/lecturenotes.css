@@ -1,0 +1,62 @@
+
+@media print {
+  body {
+    font-family: roman, 'times new roman', times, serif;
+  }
+}
+
+@media screen {
+  body {
+    font-family: arial, helvetica, sans-serif;
+  }
+}
+
+
+body {
+  border: thin solid black;
+  margin: auto;
+  padding: 25px;
+  padding-top: 0;
+  font-size: 12pt;
+  width: 75ex;
+}
+
+h1,
+h2,
+h3 {
+  padding-top: 1em;
+  padding-bottom: 0;
+  margin: 0;
+}
+
+table {
+  border: thin solid black;
+  border-collapse: collapse;
+}
+
+table td,
+table th {
+  border: thin solid black;
+  vertical-align: top;
+  padding: 3px;
+}
+
+kbd{
+    font-weight: bold;
+}
+div.example {
+  font-size: 11pt;
+  font-family: courier, fixed, monospace;
+}
+
+.todo {
+  color: red;
+  font-weight: bold;
+}
+.comment {
+  color: green;
+  font-style: italic;
+}
+.centre {
+  text-align: center;
+}

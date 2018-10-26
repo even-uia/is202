@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>IS-202 Lecture Notes</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="lecturenotes.css" />
+  </head>
+  <body>
+    <h1>IS-202 Lecture Notes</h1>
+    <hr />
+
+    <h2>Installing netbeans and tomcat</h2>
+    <p>The easiest way to install netbeans and tomcat, is to download the
+      JavaEE bundle from netbean's download page (<a
+          href="https://netbeans.org/downloads/">https://netbeans.org/downloads/</a>.
+      Run the installer. When asked to choose which servers to install,
+      select tomcat, and deselect GlassFish and any other servers.</p>
+
+    <p>You will be asked for a username and password for a tomcat user. Enter
+      something that you will remember.</p>
+
+    <p>Life is much easier if tomcat is the only web server you have installed,
+      because any additional server may interfere  with tomcat. For example
+      other web servers may grab the ip ports that tomcat wants to use.
+      So unless you are really good at configuring the different servers, you
+      should not install any other than tomcat.</p>
+
+    <h3>Things to remember</h3>
+    <p>The installation creates a few files and directories (folders) that
+      you will need later. They are:</p>
+    <dl>
+      <dt>CATALINA_HOME</dt>
+      <dd>This is the tomcat installation's main directory.  The environment
+        variable CATALINA_HOME will hold the path to this directory.  Actually
+        there isn't anything interesting in CATALINA_HOME. It's in the
+        subdirectories.</dd>
+      <dt>CATALINA_HOME/conf/server.xml</dt>
+      <dd>This is the main configuration file for tomcat.  If you make a
+        mistake here, tomcat may stop working. So don't tamper with
+        it.  If you must, at least make a backup of the original
+        file first</dd>
+      <dt>CATALINA_HOME/conf/Context.xml</dt>
+      <dd>This file serves the same purpose as the context.xml of the
+        application, but the content here is valid for all applications,
+        while the content of the project/application's context.xml is only
+        valid for the application.</dd>
+      <dt id="tomcat-users_xml">CATALINA_HOME/conf/tomcat-users.xml</dt>
+      <dd>This file contains tomcat's default user database.  The admin user
+        that was created during the installation of netbeans is stored here.
+        You should be fine if you only add new users, but be careful to get
+        the markup right.
+      </dd>
+    </dl>
+
+
+
+
+  </body>
+</html>
