@@ -1,0 +1,30 @@
+Example project directory
+
+Place example projects here.  Add project main directories here, the
+structure should be like this:
+
+IS202-2019 - +lecture-notes
+                     |
+		     +examples - +
+		      |			 |
+					 +- easy---+
+					 |		|
+					 |		+-src
+					 |		+test
+					 |		+build.xml
+					 |		...
+					 |
+					 +- easy---+
+					 |		|
+					 |		+-src
+					 |		+test
+					 |		+build.xml
+					 |		...
+					 |
+					 +- easy---+
+							|
+							+-src
+							+test
+							+build.xml
+							...
+	
