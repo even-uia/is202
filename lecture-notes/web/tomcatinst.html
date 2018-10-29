@@ -17,7 +17,8 @@
       Run the installer. When asked to choose which servers to install,
       select tomcat, and deselect GlassFish and any other servers.</p>
 
-    <p>You will be asked for a username and password for a tomcat user. Enter
+    <p>You will be asked for a username and password for an admin user. Netbeans
+      needs this when you deploy your webapps to tomcat. Enter
       something that you will remember.</p>
 
     <p>Life is much easier if tomcat is the only web server you have installed,
@@ -28,18 +29,22 @@
 
     <h3>Things to remember</h3>
     <p>The installation creates a few files and directories (folders) that
-      you will need later. They are:</p>
+      you will need later.</p>
+
+    <p> Most of the files mentioned below are configuration
+      files for tomcat.  Any error in these files may cause tomcat to stop
+      working. So the general advice is: Leave these files alone. Do not edit
+      them.  If want to do something that requires a change in these files make
+      a backup of the file first.</p>
     <dl>
       <dt>CATALINA_HOME</dt>
       <dd>This is the tomcat installation's main directory.  The environment
         variable CATALINA_HOME will hold the path to this directory.  Actually
-        there isn't anything interesting in CATALINA_HOME. It's in the
+        there isn't anything interesting in CATALINA_HOME itself. It's in the
         subdirectories.</dd>
       <dt>CATALINA_HOME/conf/server.xml</dt>
       <dd>This is the main configuration file for tomcat.  If you make a
-        mistake here, tomcat may stop working. So don't tamper with
-        it.  If you must, at least make a backup of the original
-        file first</dd>
+        mistake here, tomcat may stop working</dd>
       <dt>CATALINA_HOME/conf/Context.xml</dt>
       <dd>This file serves the same purpose as the context.xml of the
         application, but the content here is valid for all applications,

@@ -10,11 +10,50 @@
     <h1>IS-202 Lecture Notes</h1>
     <hr />
     <h2>Html forms and links</h2>
-    
+    <p>This note will explain how to create html forms.</p>
+
+    <h3>Forms</h3>
+    <p>Forms is a way to send input to web applications. They allow the user
+      to provide input by filling in forms, select various options, and even
+      upload files.</p>
+
+    <p>The html tag used to make forms is, unsurprisingly, form. The form tag
+      has many attributes, but only two of them are strictly necessary:</p>
+    <ul>
+      <li>The method attribute tells the client (browser) which type
+        of request to use when the form is sent to the server.
+      </li>
+      <li>The action attribute tells the client where to send the
+        request. It is specified as a url to a servlet. There is a strong
+        coupling between the servlet and the form, but it is not much that
+        can be done about it.  The servlet must know what the form contains,
+        otherwise it will be unable to process it, seen from the other side:
+        the form must provide the input that the servlet expects.</li>
+    </ul>
+
+    <pre lang="html">
+&lt;form metod="post" action="url-to-form-processor"&gt;
+    &lt;!-- Form content --&gt;
+&lt;/form&gt;
+    </pre>
+    <p>When the user clicks on a <a href="#submit_button">submit button</a>
+      the browser creates a new message of the type specified by the method
+      attribute, and include all the data from the form and sends it to
+      the servlet specified by the action attribute.</p>
+    <p>The main difference between get and post methods is that if post
+      is specified the browser will send a post message with the form data
+      in the message body. If get is specified the browser sends a get message
+      and since get messages do not have a body, the form data will be
+      encoded in the url.  There are two cases where you must use the post
+      method: If the form will start a non-reversible action, such as
+      confirming an order in a webshop, post must be used. The other case
+      is if the form contains data that cannot be encoded in the url, e.g.
+      a fileupload</p>
+
     <h3>The input tag</h3>
-    
-    <h3>Submit buttons</h3>
-    
+
+    <h3 id="submit_button">Submit buttons</h3>
+
     <h3>Hyperlinks</h3>
   </body>
 </html>
