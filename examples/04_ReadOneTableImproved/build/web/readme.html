@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+    <html>        
+    <head>
+        <title>Readme</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <h1> Connect to Database </h1>
+            <p> </p>
+           
+           <h1> What to do</h1>
+            
+            
+              
+           <p class="blue">In Context.xml: Define DataSource </p>
+              
+           <p class="red"> In Web.xml: Define which DataSource to use (May be omitted)</p>
+           <p class="blue"> In the Java code, use the DataSource to log into the database</p>
+           <p class="red"> Here we have restructured the code. </p>
+           <p class="blue"> The loggInn() method returns a Connection </p>
+           
+           <p class="red"> When we use the loggInn(out) method, we do 
+                  this in a try with resources structure. 
+                  <a href ="https://stackoverflow.com/questions/8066501/how-should-i-use-try-with-resources-with-jdbc"> Stackowerflow try with resources </a>                 
+          </p>
+          <p class="blue">     For Student, we have a Servlet, here called RetrieveData. 
+                  The new thing is that we have a tool class for Student, here
+                  called StudentTools. The structure we will try to follow is 
+                  that when a request is "ordered" from the user, the Servlet will 
+                  create the necessary toold, that means objects, and call the 
+                  necessary methods. The logic and details should be in the tool, 
+                  the Servlet should be as "clean" and simple as possible.
+          </p> 
+          
+         </body>
+    </html>
