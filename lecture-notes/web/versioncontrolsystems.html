@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>IS-202 Lecture Notes</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="lecturenotes.css" />
+  </head>
+  <body>
+    <h1>IS-202 Lecture Notes</h1>
+    <hr />
+    <h2>Version Control Systems</h2>
+    <p>Version Control Systems (VCS), or Source Code Control Systems, are
+      essential tools in all real-life system development projects.  They
+      provide a robust and secure way of sharing the source code between the
+      developers. They fill the role of project archive, and in the archive
+      (or repositories they are commonly called) there will be backups that
+      a developer can fall back on after various disasters. It will also
+      be possible to revert to a snapshot of the code made at important
+      moments in time, e.g. a delivery to the customer.</p>
+
+    <h3>What do vc systems do?</h3>
+    <p>An important part of any vc systems is the repository. The repository
+      is where the source code is stored. Then there is the client, which each
+      developer will use to maintain his working copy.  The working copy is
+      the developers own copy the files from the repository. The client compares
+      the working copy with the contents of the repository, and can update the
+      repository with the changes made by the developer, or it can update
+      the working copy with changes made by other members of the team.</p>
+
+    <p>When updating to or from the working copy, a conflict can occur. A
+      conflict happens when two developers have made changes to the same file,
+      that are so intertwined that the merging algorithm cannot cope.</p>
+
+    <p>When there are no conflicts, or all have been resolved, the update is
+      accepted into the repository.  The remembers all updates it receives,
+      when they happened and what the changes were. So you can get back to any
+      old version of the system, provided you remember when that version
+      was merged into the repository. However this is a very useful operation,
+      because it allows the team to recreate, for example, the latest published
+      version of the system, in a couple of minutes, so it can be tested
+      or debugged.</p>
+
+    <p>TODO branching</p>
+
+    <h3>Choosing a version control system</h3>
+    <p>There are two major types of version control systems: Centralized
+      systems and distributed version control systems.   Subversion and Git
+      are the most widespread open-source version control systems of each type</p>
+    <p>Git is a distributed version control system. Distributed means that
+      there is not just one repository. In fact every project member will have
+      their own copy of the "master" repository. (Master in quotes, because
+      having a master repository isn't necessary. It's just an agreement
+      within the project that the contributions of all members shall be
+      merged into a particular repository</p>
+
+
+    <h3>GIT</h3>
+    <p>The text below describes how to set up and use a git repository on
+      GitHub. All group members must register as users of github. To register:</p>
+    <ul>
+      <li>Go to https://github.com</li>
+      <li>Enter a username, you email, and password</li>
+      <li>Click on the green button at the bottom of the form</li>
+    </ul>
+
+    <h4>Creating a repository</h4>
+    <p>The actions described under this heading should only be carried
+      out once, by the repository owner (the group member who created it).
+      You will not need more than one master repository.</p>
+    <ul>
+      <li>Log in on github</li>
+      <li>Click the little '+' in the upper right corner of the page</li>
+      <li>Select new repository</li>
+      <li>In the new repository form enter a name for the repository.
+        In the description field you may enter something like: my group's
+        project repository"</li>
+      <li>Leave the rest as it is, and click on <kbd>Create repository</kbd></li>
+    </ul>
+    <p>Before you start using the repository it is a good idea to create
+      new branch that will be your working branch.
+      (<em>Tip: Read the "<a href="https://guides.github.com/activities/hello-world/">
+          GitHub Guide</a></em>) You can create the branch in GitHubs web interface:</p>
+    <ul>
+      <li>Go to the repository page on github.com</li>
+      <li>click on the <kbd>Branch: master</kbd> button, and fill in the name
+        of the working branch</li>
+      <li>enter the name of the working branch in the dialog, and click on the
+        <kbd>Create [Branch name]</kbd> button.</li>
+    </ul>
+
+    <p>The repository owner can now add the other the other group members
+      as collaborators:
+    </p>
+      <ul>
+        <li>Goto the repository page
+          (https://github.com/<em>[username]/ [repositoryname]</em>)</li>
+    </ul>
+
+    <h4>Keeping your clone and working copy updated</h4>
+
+    <h4>Updating the master repository</h4>
+
+    <h3>Subversion</h3>
+
+    <h4>Creating a repository</h4>
+
+
+    <h4>Joining a project</h4>
+
+    <h4>Updating the working copy</h4>
+
+    <h4>Updating the repository</h4>
+
+  </body>
+</html>
