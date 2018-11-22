@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/fileupload">
+
+    <Resource type="javax.sql.DataSource" name="jdbc/upload"
+              driverClassName="com.mysql.jdbc.Driver" auth="Container"
+              username="rolodex" password="admin"
+              url="jdbc:mysql://localhost:3306/fileupload" />
+
+</Context>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Secure Web Application</title>
+    <link rel="stylesheet" type="text/css" href="example.css"/>
+  </head>
+  <body>
+    <h1>Secure Webapp<br/>Form authentication</h1>
+    <p>This project started as a clone of the SecAuthBASIC project. There are
+      just a few lines of new code, and a few new html pages.</p>
+
+    <p>The main difference is that this project uses FORM based authentication.
+      That is, rather than displaying a dialog, the system will display a
+      page with an html form where the user can enter her credentials when
+      she wants to log in. Furthermore, there is a logout button, so you can
+      log out, and login as another user, without having to restart
+      the browser.</p>
+
+    <h3>Test Links:</h3>
+    <ul>
+      <li><a href="test.a">http://localhost:8080/SecAuthFORM/test.a</a></li>
+      <li><a href="test.s">http://localhost:8080/SecAuthFORM/test.s</a></li>
+      <li><a href="test.t">http://localhost:8080/SecAuthFORM/test.t</a></li>
+      <li><a href="side.a">http://localhost:8080/SecAuthFORM/longer/side.a</a></li>
+      <li><a href="aide.s">http://localhost:8080/SecAuthFORM/exception/side.s</a></li>
+    </ul>
+
+    <form action="logout">
+      <input type="submit" value="Log out"/>
+    </form>
+
+  </body>
+</html>

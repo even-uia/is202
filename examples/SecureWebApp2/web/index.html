@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>TODO supply a title</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <h1>Secure Webapp</h1>
+    <p>This project demonstrates BASIC authentication,
+      and the UserDatabaseRealm.  These are not suited for production,
+      but they are quick and easy to set up, and they can be just as easily
+      replaced in a production environment so they are a good choice for
+      development.</p>
+
+    <p>The test servlet will handle any url that ends in <code>.a</code>,
+      <code>.s</code>, or  <code>.t</code>, but login as sysadm, student, or
+      teacher is required. Open CATALINA_HOME/conf/tomcat-users.xml to see the
+      defined users.</p>
+
+    <h3>Test Links:</h3>
+    <ul>
+      <li><a href="test.a">http://localhost:8080/SecureWebapp1/test.a</a></li>
+      <li><a href="test.s">http://localhost:8080/SecureWebapp1/test.s</a></li>
+      <li><a href="test.t">http://localhost:8080/SecureWebapp1/test.t</a></li>
+      <li><a href="side.a">http://localhost:8080/SecureWebapp1/side.a</a></li>
+      <li><a href="aide.t">http://localhost:8080/SecureWebapp1/side.s</a></li>
+      <li><a href="side.s">http://localhost:8080/SecureWebapp1/side.t</a></li>
+    </ul>
+  </body>
+</html>

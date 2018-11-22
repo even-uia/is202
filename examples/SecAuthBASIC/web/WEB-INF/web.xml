@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+
+    <!-- A security constraint is a limit on what the users can do.
+    The constraint is enforced by tomcat, no programming is needed
+    All necessary info is in this file -->
+    <security-constraint>
+        <!--  to access these pages  -->
+        <web-resource-collection>
+            <!-- giving a name to the pages protected by this
+            security-constraint -->
+            <web-resource-name>Student Resources</web-resource-name>
+            <!-- The url-pattern(s) define the set of pages (including
+            those written by servlets) that are covered by this
+            security-constraint -->
+            <url-pattern>*.s</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>student</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <security-constraint>
+        <!--  to access these pages  -->
+        <web-resource-collection>
+            <web-resource-name>Teacher Resources</web-resource-name>
+            <url-pattern>*.t</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>teacher</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <security-constraint>
+        <!--  to access these pages  -->
+        <web-resource-collection>
+            <web-resource-name>Admin Resources</web-resource-name>
+            <url-pattern>*.a</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>sysadm</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <!--  the available roles you must declare all the roles you need here,
+    It is a little strange to declare the roles after using them in the
+    security-constraints above, but thats the way it is... -->
+    <security-role>
+        <role-name>student</role-name>
+    </security-role>
+    <security-role>
+        <role-name>teacher</role-name>
+    </security-role>
+    <security-role>
+        <role-name>sysadm</role-name>
+    </security-role>
+
+    <!-- which realm to use, and how to handle authentication -->
+    <login-config>
+        <!-- basic authentication is the simplest method for authentication
+        It will show a dialog, asking for username and password, which will
+        be sent in cleartext to the server  -->
+        <auth-method>BASIC</auth-method>
+
+        <!-- A realm is somewhere tomcat gets the usernames, passwords and
+        roles from. UserDatabaseRealm uses the information in tomcat-users.xml
+        There is no way to change this file, except using a text/xml editor,
+        so you must edit CATALINA_HOME/conf/tomcat-users.xml to add the
+        users you need. -->
+        <realm-name>UserDatabaseRealm</realm-name>
+    </login-config>
+</web-app>
