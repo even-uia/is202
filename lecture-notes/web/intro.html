@@ -1,16 +1,308 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html
+    xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <title>IS-202 Lecture Notes</title>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" href="lecturenotes.css" />
+    <meta
+        charset="UTF-8" />
+    <link
+        rel="stylesheet"
+        href="lecturenotes.css" />
   </head>
   <body>
     <h1>IS-202 Lecture Notes</h1>
-    <hr />
-    <h2></h2>
-    <p></p>
- 
+
+    <h2>Introduction to concepts</h2>
+    <p>When you are surfing the web, you are probably paying much more attention
+      to the displayed content, than to how it actually works, as you float from
+      page to page. However, a lot of what you will be told in this course is
+      not always meaningful, unless you know the context. That is the purpose of
+      this note: To give you an overview of how the web works, and give you the
+      insight to see how all the seemingly unrelated pieces fit together.</p>
+    <p>A textbook would define the web as something like:</p>
+    <blockquote> The world wide web (abbreviated WWW) is a distributed
+      information space, where documents and other resources are available over
+      the internet. The resources are identified by uniform resource locators.
+      The documents are connected with hypertext links.</blockquote>
+
+    <h3>Navigating the web</h3>
+    <p>How do you get from one page to another? A user interface designer might
+      draw a map like the one in <a
+          href="#fig1">figure 1</a>. This map tells you which pages are connected
+      with links, but as a developer you need to know how the system manages to
+      replace what you can see in the browser, when you navigate to a new page. </p>
+
+    <figure id="nav1">
+      <img src="image/nav1.png" />
+      <figcaption>Figure 1: Simple sitemap</figcaption>
+    </figure>
+
+    <p>The web resources are kept on servers, so every time you move on to
+      another document, the client (browser) must get the the document, and
+      possibly some other resources from one or more servers. When the user
+      clicks on a link, (or types in the URL, the browser will send a request
+      for the document to the server. The server responds with a message that
+      contains the requested document. When the browser has received the
+      document it will scan it, to find links to resources that are embedded in
+      the document (e.g. pictures or stylesheets), send a request for each
+      resource, and display the resource when it is received from server.</p>
+    <p>The location of the resources are specified with URLs, e.g.
+      <code>http://server/path/to/resource</code>. Http is the communication
+      protocol, i.e. the rules for communication between web browsers and
+      servers, Next is the server ip address or its dns name, and the rest
+      identifies the resource on the server.</p>
+    <p>If we install this page on a web server, and you click on a link to it,
+      your browser will send a message to the server, asking for the file. The
+      server will respond with a status code, and a stream of the characters in
+      the file. Your browser will read the character stream, and when it gets to
+      the figure below, it will send a new message to the server, asking for the
+      image file that is used in the figure. Actually, yet another message has
+      been sent, to get the stylesheet that there is a link to in the file
+      header. These linked objects willl often be received from the same server,
+      but they don't have to. It is perfectly fine to have all the images on a
+      separate server, for instance.</p>
+
+    <figure
+        id="nav2"><img
+          src="image/nav2.png" />
+      <figcaption>Figure 2: Communication between browser and
+        server(s)</figcaption>
+    </figure>
+
+    <p><a href="#nav2">Figure 2</a> shows in much more detail what will happen if
+      the user clicks on the link to intro in figure 1:</p>
+
+    <ol>
+      <li>We assume that the user either types the url to index.html in the
+        address field in his browser, or selects it from his bookmark list. The
+        browser sends a request to the server referred to in the link, for the
+        document index.html</li>
+      <li>The server responds by sending the requested document to the browser.
+        The browser will display it in the browser window, replacing whatever
+        the user was viewing before.</li>
+      <li> If the user wants to read the intro he will click on the link to it,
+        which will make the browser send a new request to the server, this time
+        asking for intro.html. </li>
+      <li>The server responds by sending the document to the browser. This time,
+        however, the browser discovers that the document contains several links
+        to other resources that should be displayed as part of the document. </li>
+      <li> Intro.html contains a link to a stylesheet, so the browser sends a
+        request to the server, asking for the stylesheet. Note that the
+        stylesheet is retrieved from a different server than the document. This
+        may be a little unusual, but the it is handled just like any other
+        request.</li>
+      <li>The server returns the stylesheet</li>
+      <li>The browser finds several links to images (only one is shown here).
+        These are handled in the same way as the stylesheet: A request is sent
+        to the server</li>
+      <li>The server responds by sending the image back to the browser.</li>
+    </ol>
+
+    <p>You may have noticed that there is a pattern in the communication: The
+      browser sends requests for documents and other resources, and the server
+      responds by sending them to the browser. The important conclusions to draw
+      from this is that:</p>
+    <ul>
+      <li>Navigation from one page to another requires at least one
+        request/response roundtrip to a server</li>
+      <li>The only way to change what the user sees in his browser is to request
+        a new page from a server, and this must be initiated by the user. (We
+        disregard client side scripting here, since it is not part of the
+        course)</li>
+    </ul>
+
+    <p>The <a href="#http">HyperText Transfer Protocol (HTTP)</a>, the rules for
+      communication between web clients (browsers) and server is described in
+      more detail <a href="#http">below</a>. There is also a section that covers
+      <a href="urls">Uniform Resource Locators (URL)</a>. A thorough presentation
+      of the The HyperText Markup Language (HTML), requires more space, so it is
+      covered in a separate note</p>
+
+    <h2>URLs : Uniform Resource Locators</h2>
+    <p>Uniform Resouce Locator, or URL is the address format of the web.  A URL
+      specifies exactly where, and to some extent how, a resource on the web
+      can be found.  The course catalogue page for IS-202 should be an appriopriate
+      place to start. The URL is:</p>
+    <pre>
+        https://www.uia.no/studieplaner/topic/IS-202-1
+    </pre>
+    <p>We can see that this url contains the same parts as the obviously fake
+      url shown in the example above. It starts with the protocol specifier
+      specifies the communication protocol that must be used to retrieve the
+      resource. Next is the network address of the host computer. <code>www.uia.no</code>
+      is a DNS name. DNS is like a phonebook for the internet, it maps readable
+      names to ip addresses.  Numerical ip addresses can also be used, both forms
+      will uniquely identify a computer on the internet.  You will
+      use a special ip address a lot in this course:  The ip loopback address
+      <code>127.0.0.1</code> allow you to connect to you own computer over the
+      internet. You can also use the DNS name form localhost.  Both forms can
+      be used to refer to your own computer.  Note that a web server is not a
+      computer.  It is a program.  The computer that the web server (or any
+      other server)runs on is called a host.
+    </p>
+
+    <p>The last major part of the url is the resource path, which specifies
+      exactly where the server can find the resource.  A get request for the url
+      above tells uia's web server that the client is asking for the document identified
+      by /studieplaner/topic/IS-202-1, sent over the secure http protocol (https),
+      from the web server runnning on the host www.uia.no.</p>
+
+    <p>Sometimes you must append a port number to the host address, like this:
+      <code>localhost:8080</code>.  If the port number is not specified in the
+      url, it means that the standard port should be used.  Which port depends
+      on the protocol, http uses port number 80.  However, it is often convenient
+      to use another port number during development.  Port 80 and the other default
+      ports can only be assigned by a system administrator.  If you need to test
+      different server configurations, you can assign the servers to different
+      ports, and run all on the same host. Common alternative ports for http
+      are 8080 and 8181, if you need more, any number larger than 1024, and
+      preferably contains the digit 8 (e.g. 1080, 1088, 10080) is all right.</p>
+
+    <h3>Relative urls</h3>
+    <p>The <a href="#httprequest">"request messages</a> contain the equivalent
+      of a full url.  We would rather not use full urls in the links between
+      pages in a web application.  If the application is installed at different
+      locations during development and production, it will be necessary, to find
+      and change the url of every link in the system. This is at best an
+      inconvenience, but also a source of bugs. Luckily for us, we don't have to.
+      We can use relative urls in the links.</p>
+    <p>Consider a web application that consists of three pages with the
+      following urls:</p>
+    <pre>
+      http://fixit.com/projects/soapbox/index.html
+      http://fixit.com/projects/soapbox/onepage.html
+      http://fixit.com/projects/soapbox/prices/no.html
+      http://fixit.com/projects/soapbox/prices/en.html
+    </pre>
+    <p>The appliction will be installed at the soapbox company and the urls become:</p>
+    <pre>
+      http://soapbox.com/index.html
+      http://soapbox.com/onepage.html
+      http://soapbox.com/prices/no.html
+      http://soapbox.com/prices/en.html
+    </pre>
+    <p>If we remove soapbox and everything in front in the dev urls, we get
+      exactly the same result as removing everything up to and including .com
+      in the production urls would do.  This is the idea behind relative urls.</p>
+    <p>A relative url is always relative to the document that contains the link.
+      If index.html contains links to onepage.html and prices/no.html, the browser must
+      reconstruct the full url before sending the request to the server.  It starts
+      with the full url of the page that contains the links (index.html) and replaces
+      the last part (index.html) with the relative url.  To get a full url to no.html
+      replace index.html must be replaced with prices/no.html</p>
+    <p>If there is a link in no.html to en.html, the relative url is just
+      en.html. And a final example: A link in no.html back to index.htm would
+      require the relative url ../index.html.  This may not work. The server may
+      block urls containing <code>..</code> because it may be a security risk.</p>
+    <p>Relative urls are only useful when linking to other pages within the
+      application.  Use a full url when linking to external resources.</p>
+
+    <h3>Java EE urls and url paterns</h3>
+    <p>Java EE has some special constructs for handling urls.  The resource path
+      is divided into a context path and a servlet path.  The following example
+      shows the resulting parts:</p>
+    <pre>
+      http://server:port/contextpath/servletpath
+    </pre>
+    <ul>
+      <li>The protocol, server address, and port number is exactly as described above</li>
+      <li>The contextpath identifies the application.  The default contextpath
+        is the name of the deployed war file, but this can be overridden in context.xml</li>
+      <li>The servletpath identifies a servlet within the application.</li>
+    </ul>
+
+    <h2 id="http">HTTP: The HyperText Transfer Protocol</h2>
+    <p>The HyperText Transfer Protocol defines the rules for communication
+      between web servers and browsers. As noted above the protocol is quite
+      simple: The browser sends a request for a document, and the server
+      responds with a message that contains the requested document.</p>
+    <p>It is useful to know a little more about http, in particular when
+      things do not work as expected. The remainder of this note describes
+      the protocol and the messages it transfers in more detail</p>
+
+
+    <h3>Detailed description of HTTP</h3>
+    <p> HTTP is an application level protocol: It defines communication between
+      parts of an application (browser and server), and it depends on a
+      transport protocol such as tcp to actually send the messages.</p>
+    <p>The communication is initiated by the browser when the user clicks on a
+      link, or types a URL:</p>
+    <ol>
+      <li>First the browser opens a TCP connection to the specified port on the
+        server. Strictly speaking this is not part of the HTTP protocol, but the
+        connection is needed to send any HTTP messages.</li>
+      <li>When the connection is established the browser sends an HTTP request
+        message. There are several types of request messages. These are
+        described below.</li>
+      <li>The web server responds with an HTTP response message. The response
+        usually contains the requested resource, but it may also contain error
+        messages or other information. The resource is typically an html
+        document, or perhaps an image, but it can be any kind of data.</li>
+      <li>In the original version of the protocol the browser would shut down
+        the TCP connection after the response had been received.  Current
+        web browsers and servers will usually keep the connection open in
+        anticipation of further requests from the browser (for example to
+        retrieve images linked to by a
+        page).</li>
+    </ol>
+
+    <h3 id="httprequest">HTTP Request Messages</h3>
+    <p>Request messages are allways sent by the browser to the server.</p>
+    <p>The most common request is GET request, which is used to retrieve
+      resources, i.e. to follow links. The server’s response to GET requests
+      usually contains the requested resource in the message body, but the
+      server will send an error message instead if the resource is unavailable.
+      If you enter the URL http://www.uia.no/index.html in a browser, the
+      following request would be sent:</p>
+    <pre>
+    GET /index.html HTTP/1.1
+    </pre>
+    <p>Note that GET requests are meant to be used to retrieve information. You
+      should never use GET requests to perform irreversible actions, such as
+      placing an order, or charging the user’s credit card. The user should get
+      exactly the same result whether he clicks just once or several times on a
+      link. If you want to perform an action that makes an irreversible change
+      to the state of the system, you should use a form to send POST request
+      instead.</p>
+    <p>The POST request method is used to send data to the server (e.g. the data
+      entered in an HTML form - including fileuploads). The data is included in
+      the body of the request. The server may use the data to add new resources,
+      or change existing ones.</p>
+    <p>The data is sent to the server as request parameters. Each parameter has
+      a name and a value. With POST requests, parameters are usually encoded in
+      the request body. Even GET requests can have parameters, but they do not
+      have a body, so any parameters must be encoded in the URL. We will have a
+      closer look at parameters in section TODO xref html</p>
+    <p>Web servers are only required to implement the GET and POST methods. The
+      other request methods are optional, and are rarely used, so we will not go
+      into them here.</p>
+
+    <h3>HTTP Responses</h3>
+    <p>Response messages are sent by the browser, as a response to a request
+      sent by the browser. The first line of the HTTP Response message contains
+      a three-digit status code:</p>
+    <ul>
+      <li>1xx codes are informational.</li>
+      <li>2xx status codes indicate successful processing of the request.</li>
+      <li>3xx status codes are used to redirect the browser to another URL.</li>
+      <li>4xx status codes indicate that something is wrong with the request.
+        The most common is probably 404 which is sent when the requested
+        resource does not exist.</li>
+      <li>5xx status codes indicate a server error while processing the
+        request.</li>
+    </ul>
+    <p>Depending on the status code the response message may contain additional
+      data. The most common status code is 200, which is used when a request has
+      been successfully processed, and the resources is being sent in the
+      response body.</p>
+    <p>The response message is handled by the browser, so we do not need to go
+      into more detail. Note however that 4xx and 5xx response will cause the
+      browser to display an error message with no link back to the application.
+      This is not very user friendly. Therefore you should always try to return
+      a normal page, even when something goes wrong in the handling of a
+      request. A page with a helpful message and links that allow the user to
+      proceed is a lot better than returning just an error status.</p>
+
   </body>
 </html>
