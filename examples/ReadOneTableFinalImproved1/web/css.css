@@ -12,6 +12,8 @@ and open the template in the editor.
 body { text-align:center; margin:0; padding:0; background-color: lightgrey; }
 */
 
+body {background: lightgray;}
+
 header {  background: #9fc230; height: 80px; padding: 20px;}
 
  
@@ -36,14 +38,14 @@ h1, h2, h3 { color: #517400; }
 h1.normal {color: yellow;}
 
 .form1 {
-            background-color: lightgreen;
+            background-color: #f2f4ed;
             padding: 20px;
             border: 5px solid #4CAF50;
 }
 
 .form2 {
     
-            background-color: lightseagreen;
+            background-color: #f2f4ed;
             padding: 20px;
             border: 5px solid #4CAF50;
 }
@@ -55,4 +57,5 @@ h1.normal {color: yellow;}
 input {
     position: absolute;  
     margin-left: 400px;
+    background: #f7efb4 ;
 } 

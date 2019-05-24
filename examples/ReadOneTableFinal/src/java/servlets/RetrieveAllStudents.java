@@ -19,8 +19,8 @@ import student.StudentTools;
  *
  * @author hallgeir
  */
-@WebServlet(name = "retrieveData", urlPatterns = {"/retrieveData"})
-public class RetrieveData extends HttpServlet {
+@WebServlet(name = "RetrieveAllStudents", urlPatterns = {"/RetrieveAllStudents"})
+public class RetrieveAllStudents extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -47,15 +47,27 @@ public class RetrieveData extends HttpServlet {
             out.println("</head>");
             
             out.println("<body>");
-            out.println("<h1>Retrieve data  </h1>");
-             
+            // out.println("<h1>Retrieve data  </h1>");
+            // out.println("<h1> <a href = index.html> Home </a> </h1>");
             String name = request.getParameter("name");
             String numberStr = request.getParameter("number");
+            /*
+                We are using the same servlet to retrieve all students, 
+                select some students by name, and to test if we can run 
+                a selection many times. Checking connections to DB
+            */            
+            if (name==null)
+                name="";
+            if (numberStr==null)
+                numberStr="1";
+
             int number = Integer.parseInt(numberStr);
+            
+            //out.println("name" +name +"Number " +number);
             
             StudentTools studentTools = new StudentTools();
             studentTools.studentRetrieve(out,name,number);
-            
+           
             out.println("</body>");
             out.println("</html>");
         }

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!--
+-->
+<html>
+    <head>
+        <title> One form student </title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <link href="css.css" rel="stylesheet" type="text/css">
+    </head>
+    
+    <body>
+        <div>
+            <h1> Connects one form to a servlet. </h1>
+            <p><a href ="readme.html">Readme.html</a></p>
+            <h2>This example illustrates how to have a system with one 
+            form. Data is retrieved from the forma, and printed on screen. 
+            </h2>
+            <div class ="form1">
+            <form action="personRetrieve" method="post">
+                Person number: <input type='text' name='pnr' value='0'>
+                <br>
+                FirstName    : <input type='text' name='firstName' value='0'>
+                <br>
+                LastName     : <input type='text' name='lastName' value='0'>
+                <br>
+                email        : <input type='text' name='email' value='0'>
+                <br>
+                <input type='submit' name='hent' value='Hent'>
+                <br>
+                <input type='submit' name='hent' value='ConnectToDB using DataSource'>
+                <br>
+                <input type='submit' name='hent' value='ConnectToDB Straight ahead'>
+                
+                
+            </form>  
+           </div>
+              <br><br>
+           
+        </div>
+    </body>
+</html>

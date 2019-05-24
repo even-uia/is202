@@ -25,15 +25,17 @@ and open the template in the editor.
            <p class ="blueBig">
                The following is done: 
            <ol>
-               <li>Create a Prepared Statement object </li>
+               <li>Create a Prepared Statement object. See in the 
+                    StudentTools class, in the method  studentRetrieveAll() 
+                    or updateStudent() or newStudent </li>
                <li>The code will typically be something like: 
 
                    public void skrivStudenter(PrintWriter out) <br>
                    { <br>
                    PreparedStatement getStudents; <br>         
                    try { <br>
-                   getStudents = conn.prepareStatement("select * from student order by ?");<br>
-                   getStudents.setString(1,"firstName");<br>
+                   getStudents = conn.prepareStatement("select * from student where snr =?");<br>
+                   getStudents.setInt(1,"snr");<br>
                    <br>
                    ResultSet rset = getStudents.executeQuery();<br>
  
@@ -43,8 +45,7 @@ and open the template in the editor.
                    int rowCount = 0; <br>
                    while(rset.next()) {   <br>
                    ...............................
-               
-               
+                              
                </li>
            </ol>
            </p>

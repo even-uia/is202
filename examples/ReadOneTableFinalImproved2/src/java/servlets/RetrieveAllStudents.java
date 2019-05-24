@@ -9,18 +9,17 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import klasser.ToolBox;
+import klasser.HttpServletProject;
 import student.StudentTools;
 
 /**
  *
  * @author hallgeir
  */
-@WebServlet(name = "retrieveData", urlPatterns = {"/retrieveData"})
-public class RetrieveData extends HttpServlet {
+@WebServlet(name = "RetrieveAllStudents", urlPatterns = {"/RetrieveAllStudents"})
+public class RetrieveAllStudents extends HttpServletProject {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,26 +39,32 @@ public class RetrieveData extends HttpServlet {
         
         try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Retrieve Data</title>");            
-            out.println("</head>");
             
-            out.println("<body>");
-            out.println("<h1>Retrieve data  </h1>");
-             
-            String name = request.getParameter("name");
-            String numberStr = request.getParameter("number");
-            int number = Integer.parseInt(numberStr);
+               printPage(out, request,"RetrieveAll");      
             
-            StudentTools studentTools = new StudentTools();
-            studentTools.studentRetrieve(out,name,number);
-            
-            out.println("</body>");
-            out.println("</html>");
         }
     }
+    
+    @Override
+    public void printBody(PrintWriter out,HttpServletRequest request )
+           {
+            super.printBody(out, request);
+            String name = request.getParameter("name");
+            String numberStr = request.getParameter("number");
+            
+            if (name==null)
+                name="";
+            if (numberStr==null)
+                numberStr="1";
+
+            int number = Integer.parseInt(numberStr);
+            
+            //out.println("name" +name +"Number " +number);
+            
+            StudentTools studentTools = new StudentTools();
+            studentTools.studentRetrieve(out,name,number);           
+        }
+
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
