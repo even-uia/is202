@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Context path="/SecureWebApp2">
-    <CredentialHandler
-        className="org.apache.catalina.realm.MessageDigestCredentialHandler"
-        algorithm="SHA-256" />
-</Context>

@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Context path="/BaseLine">
-  <!-- HN: Definerer DataSource for databasen, her mariadb x| 
-	-->
-  <Resource auth="Container" driverClassName="org.mariadb.jdbc.Driver" name="jdbc/localhostDS" password="hallgeir" type="javax.sql.DataSource" url="jdbc:mariadb://localhost:3306/hallgeir" username="hallgeir">
-	</Resource>
-</Context>
