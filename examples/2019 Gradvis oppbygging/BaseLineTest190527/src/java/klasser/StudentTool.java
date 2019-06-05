@@ -17,18 +17,18 @@ import java.sql.*;
  * We directly send the sql string for execution. 
  */
 public class StudentTool {
-     
-    Statement stmt;
-    DBTools dbtools; 
+   Statement stmt;
+   DBTools dbtools;
     
     public void skrivStudenter(PrintWriter out)
     { 
-         String strSelect = "select * from student";
+        
+        String strSelect = "select * from student";
 
          out. println("The SQL query is: " + strSelect);
          out.println("<br>");
  
-         try {
+         try {            
              Connection conn;
              dbtools = new DBTools();
              conn = dbtools.loggInn(out); 
@@ -39,29 +39,24 @@ public class StudentTool {
              
              ResultSet rset = stmt.executeQuery(strSelect);
  
-                // Step 4: Process the ResultSet by scrolling the cursor forward via next().
-                //  For each row, retrieve the contents of the cells with getXxx(columnName).
-                out.println("The records selected are:" +"<br>");
-                int rowCount = 0;
-                while(rset.next()) {   // Move the cursor to the next row, return false if no more row
+             // Step 4: Process the ResultSet by scrolling the cursor forward via next().
+             //  For each row, retrieve the contents of the cells with getXxx(columnName).
+             out.println("The records selected are:" +"<br>");
+             int rowCount = 0;
+             while(rset.next()) {   // Move the cursor to the next row, return false if no more row
                     String studentFname = rset.getString("firstName");
                     String studentLname  = rset.getString("lastName");
                     out.println(rowCount +": " + studentFname + ", " + studentLname +"<br>");
                     ++rowCount;
-                 }  // end while
-                 out.println("Total number of records = " + rowCount);
+             }  // end while
+             out.println("Total number of records = " + rowCount);
+             conn.close();  //PS! Må explisitt lukke DB-connection
          } // end catch     
          catch (SQLException ex) {
                 out.println("Ikke hentet fra DB " +ex);
-         }
-       
+         } 
    }
-      
-    /*
-    Lagre en student manuell
-    */
-    
-    
+   
 
 /*
     Lagre en student, med bruk av Prepared Statement
@@ -80,19 +75,19 @@ public class StudentTool {
           
             newStudent = conn.prepareStatement(ins);
      
+            
              newStudent.setString(1,firstName);             
              newStudent.setString(2,lastName);  
                 
              out.println(newStudent);
              newStudent.executeUpdate();
-             
+             conn.close();
       } // end try     
          catch (SQLException ex) {
                 out.println("Ikke fått opprettet NY Student " +ex);
          }
         
   }
-    
-    
+   
 }// slutt 
     

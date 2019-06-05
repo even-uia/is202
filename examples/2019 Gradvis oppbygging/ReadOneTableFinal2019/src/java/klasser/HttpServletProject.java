@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package servlets;
+package klasser;
 
+import static Printers.StringConstants.INPSUB5;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -12,14 +13,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import klasser.StudentTool;
 
 /**
  *
  * @author hallgeir
  */
-@WebServlet(name = "hentStudentFradb", urlPatterns = {"/hentStudentFradb"})
-public class hentStudentFradb extends HttpServlet {
+@WebServlet(name = "HttpServletProject", urlPatterns = {"/HttpServletProject"})
+public class HttpServletProject extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,35 +34,53 @@ public class hentStudentFradb extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet hentStudentFradb</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet hentModulFradb at " + request.getContextPath() + "</h1>");
             
-            //StudentTool studentTool = new StudentTool(); 
-            
-            String antallS = request.getParameter("antall");
-            int antall = Integer.parseInt(antallS);		
-
-            /*  Can check that DB connection is properly 
-                closed. 
-            */
-            int loper = 1;
-            while (loper <=antall) {
-                StudentTool studentTool = new StudentTool(); 
-                studentTool.skrivStudenter(out);
-                loper++;
-                out.println("<h1> OG OM IGJEN  " +loper + "  </h1>");
-            }
-                       
-            out.println("</body>");
-            out.println("</html>");
         }
     }
+    
+    public void printMenuButtons(PrintWriter out) 
+    {
+        out.println("<form>");
+        out.format(INPSUB5, "Submit", "index.html", "Index Page");
+        out.format(INPSUB5, "Submit", "Menu", "Home");
+        out.format(INPSUB5, "Submit", "NewStudent", "New Student");
+        out.format(INPSUB5, "Submit", "retrieveStudents.html", "List Students");
+        out.println("</form>");     
+               
+    }
+    
+     public void skrivHtmlHeader(PrintWriter out,  String tittel)
+ {
+       out.println("<!DOCTYPE html>");
+       out.println("<html>");
+       out.println("<head>");
+       out.println("<title>" +tittel +"</title>");  
+       //out.println("<meta charset=\"UTF-8\">");    
+       out.println("<link rel=\"stylesheet\" href=\"css.css\">");            
+       out.println("</head>");
+ }
+     
+     public void printBody(PrintWriter out,HttpServletRequest request)
+     {
+         out.println("<body>");       
+         printMenuButtons(out); 
+     }
+     
+     public void printEnd(PrintWriter out)
+     {
+            out.println("</body>");
+            out.println("</html>");
+     }
+     
+     
+     public void printPage(PrintWriter out,HttpServletRequest request, String tittel) 
+     {
+         skrivHtmlHeader(out, tittel);
+         printBody(out, request);
+         printEnd(out);
+     }
+     
+     
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
