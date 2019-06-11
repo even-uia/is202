@@ -32,13 +32,13 @@ public class StudentTool {
              Connection conn;
              dbtools = new DBTools();
              conn = dbtools.loggInn(out); 
-
+             out.println("Conn er " +conn);
              // Step 2: Allocate a 'Statement' object in the Connection
-             
+             out.println("før stmt ");
              stmt = conn.createStatement();
-             
+             out.println("etter stmt");
              ResultSet rset = stmt.executeQuery(strSelect);
- 
+             out.println("rset er" +rset);
              // Step 4: Process the ResultSet by scrolling the cursor forward via next().
              //  For each row, retrieve the contents of the cells with getXxx(columnName).
              out.println("The records selected are:" +"<br>");
