@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package klasser;
+package servlets;
 
-import static Printers.StringConstants.INPSUB5;
+import static Printers.StringConstants.INPSUB5; //MERK
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;

@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import student.Student;
 
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Purpose of this class is to handle all printing related to students. 
+ * The class extends the GeneralPrinter. 
+ * It may print a form, f.ex when we list many students, and select one. 
+ * Or list many students, and create a link, so selected student will 
+ * be shown in a form when selected. 
  */
 
 /**
@@ -15,13 +17,12 @@ import student.Student;
  * @author hallgeir
  */
 public class StudentPrinter extends GeneralPrinter implements StringConstants {
-    
-    /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-    
+   
+/*
+    When we for example have selcted one student, where each line
+    represents a student, as a link, this method will be executed to show 
+    information. 
+    */    
  public void printStudentForm(int snr, String firstName, String lastName, PrintWriter out)
     {
         // skrivHtmlHeader(out, "Forsikringsavtaler");
@@ -64,36 +65,19 @@ public class StudentPrinter extends GeneralPrinter implements StringConstants {
         
         out.println(" <br>");        
         
-        
-        // start
-         
-        // out.format(INPSUB, "Submit", "valg", "New Asset");   
-        // out.format(INPSUB,"Submit", "valg", "Generate 5 assets");         
          out.println("</form>");  
-        // slutt
         
         out.println("");  
         out.println("</div>");  
     }
     
-/*
- public void skrivHtmlHeader(PrintWriter out,  String tittel)
- {
-       out.println("<!DOCTYPE html>");
-       out.println("<html>");
-       out.println("<head>");
-       out.println("<title>" +tittel +"</title>");  
-       //out.println("<meta charset=\"UTF-8\">");    
-       out.println("<link rel=\"stylesheet\" href=\"css.css\">");
-            
-       out.println("</head>");
- }
-  */  
-    
+
+ /*
+    Based on an incoming ArrayList of Students, a list of students
+    will be printed. Each student is represented by a link to this particular student. 
+ */
     public void printStudents(PrintWriter out, ArrayList<Student> students)
-    {
-        // skrivHtmlHeader(out, "Students");
-        
+    {   // Notice how declararation and use of this String is, 
         String STUDENT  = "<li><a href='StudentDetail?snr=%s&firstName=%s&lastName=%s'>%s %s %s</a> </li>"; 
 
         int snr;

@@ -1,6 +1,7 @@
 
 /*
  *  DataSource is defined in Context.xml
+    Purpose of this is to handle all connection to DB.
  */
 package klasser;
 
@@ -71,8 +72,5 @@ public class DBToolBox {
         return null;     
             
     }
-
-     
-
 }// slutt 
     
