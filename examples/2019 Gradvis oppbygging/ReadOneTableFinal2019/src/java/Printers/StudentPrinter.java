@@ -84,6 +84,7 @@ public class StudentPrinter extends GeneralPrinter implements StringConstants {
         String firstName;
         String lastName;
         
+        
         for (Student oneStudent : students)
         {
             // oneStudent.print(out);

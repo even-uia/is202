@@ -85,7 +85,7 @@ public class StudentTools {
                 ++rowCount;
             }  // end while
             out.println("Total number of records = " + rowCount);
-            toolBox.close(conn);
+            //toolBox.close(conn);  //HN, trengs denne, siden try with resources
             return students; 
          } // end catch     
          catch (SQLException ex) {
@@ -108,7 +108,8 @@ public class StudentTools {
         {
             ArrayList<Student> students = new ArrayList();
             // out.println("<h1> Loop index is " +runner +"<br> </h1>");
-            students = studentRetrieveAll(out,name);    
+            students = studentRetrieveAll(out,name); 
+            out.println("<h1> Number "+runner +"</h1>");
             studentPrinter.printStudents(out,students);
             runner++; 
         }    

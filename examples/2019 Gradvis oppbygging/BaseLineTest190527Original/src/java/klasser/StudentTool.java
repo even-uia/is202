@@ -50,7 +50,7 @@ public class StudentTool {
                     ++rowCount;
              }  // end while
              out.println("Total number of records = " + rowCount);
-             conn.close();  //PS! Må explisitt lukke DB-connection
+             conn.close();  //PS! Må explisitt lukke DB-connection, når vi ikke bruker try with resources. 
          } // end catch     
          catch (SQLException ex) {
                 out.println("Ikke hentet fra DB " +ex);

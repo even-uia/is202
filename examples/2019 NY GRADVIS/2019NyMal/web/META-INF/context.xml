@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/2019NyMal">
+  <!--
+    <Realm className="org.apache.catalina.realm.DataSourceRealm" dataSourceName="LocalhostDS" roleNameCol="role_name" userCredCol="user_pass" userNameCol="user_name" userRoleTable="user_roles" userTable="users"/>
+ -->
+  <Resource auth="Container" driverClassName="org.mariadb.jdbc.Driver" name="jdbc/localhostDS" password="hallgeir" type="javax.sql.DataSource" url="jdbc:mariadb://localhost:3306/hallgeir" username="hallgeir">
+	</Resource>
+       
+</Context>
