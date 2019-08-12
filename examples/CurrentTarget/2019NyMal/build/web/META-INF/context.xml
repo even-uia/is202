@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/2019NyMal">
+  <!--
+    <Realm className="org.apache.catalina.realm.DataSourceRealm" dataSourceName="LocalhostDS" roleNameCol="role_name" userCredCol="user_pass" userNameCol="user_name" userRoleTable="user_roles" userTable="users"/>
+ -->
+ 
+ <!-- HN 190808 : We can define the datasource in context.xml in the project, or in context xml 
+      in TomCat. Here we do it in the project. 
+     -->
+  <Resource auth="Container" driverClassName="org.mariadb.jdbc.Driver" name="jdbc/localhostDS" password="hallgeir" type="javax.sql.DataSource" url="jdbc:mariadb://localhost:3306/hallgeir" username="hallgeir">
+	</Resource>
+                  
+</Context>
+
+
+
