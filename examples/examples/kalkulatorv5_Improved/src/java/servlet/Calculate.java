@@ -4,7 +4,8 @@ package servlet;
  *      "engine" in the calculator
  */
 
-import funksjonalitet.toolbox;               //klassen toolbox har metoder som kalkulatoren, dvs calculate bruker. 
+import funksjonalitet.Calculator;
+import output.Printer;               //klassen Printer har metoder som kalkulatoren, dvs Calculate bruker. 
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -19,7 +20,7 @@ import java.lang.*;
  * @author hallgeir
  */
 @WebServlet(urlPatterns = {"/calculate"})      //angir url til denne servlet'en
-public class calculate extends HttpServlet {   
+public class Calculate extends HttpServlet {   
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,7 +34,8 @@ public class calculate extends HttpServlet {
  BUT the first time the servlet is activated is from a direct link from the index page. The form have not been shown.  
      */
     
-     private toolbox kalkis;        // toolbox for calculations 
+     private Printer tool;        // Printer for calculations 
+     private Calculator calcis; 
      private int result;          // resultatet av beregningene
     
               
@@ -49,20 +51,19 @@ public class calculate extends HttpServlet {
             out.println("</head>");
             out.println("<body>");
             
-            kalkis=new toolbox();
+            tool=new Printer();
+            calcis = new Calculator();
             
             String number1Str;      // retrieved from the form as a string
             String number2Str;
             
             
             /*  First time we are here, we do not come from the form, that is NO INPUT.  
-                Then both numbers are equal to null, that is, no String. 
-                 
-            
+                Then both numbers are equal to null, that is, no String.   
             */
             
-            number1Str = request.getParameter("tall1");          // number1Str er navnet på input feltet i formen
-            number2Str = request.getParameter("tall2");          // 
+            number1Str = request.getParameter("v1");          // number1Str er navnet på input feltet i formen
+            number2Str = request.getParameter("v2");          // 
             String operator = request.getParameter("operator");
             int t1;
             int t2; 
@@ -82,7 +83,7 @@ public class calculate extends HttpServlet {
   
             //out.println("Skal regne ut "+operator +number1Str +number2Str);
             
-            result = kalkis.regnUt(t1,t2,operator);
+            result = calcis.regnUt(t1,t2,operator);
             
             /**     Dersom submit knappen Clear er valgt, skal 
              *      alt nullstilles
@@ -95,7 +96,7 @@ public class calculate extends HttpServlet {
                 t2=0;
             }
             
-            kalkis.printForm2(out, t1, t2, result, operator);
+            tool.printForm2(out, t1, t2, result, operator);
                    
             
             out.println("</body>");

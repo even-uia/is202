@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package funksjonalitet;
+package output;
 
 import java.io.PrintWriter;
 import output.StringConstants;
@@ -12,57 +12,39 @@ import output.StringConstants;
  *
  * @author hallgeir
  */
-public class toolbox implements StringConstants {
-    
-     public int regnUt(int tall1, int tall2, String operator)
-    {
-        if (operator.contains("+"))
-            return (tall1+tall2);
-        else if (operator.contains("-"))
-            return (tall1-tall2);
-        else if (operator.contains("*"))
-            return (tall1*tall2);
-        else if (operator.contains("/"))
-            return (tall1/tall2);
-        else return -99;
-        
-    }
-     
-     /*     skrivForm2 er metoden i verktøykassa som skriver formen. 
-            PS: legg merke til at formen er knyttet til servleten 
-            beregn, 
-            PS2:  Ved å generere formen i en metode, kan formen vise både input 
-            og resultat. Denne kalles når en beregning er gjort. (kalt metoden over, 
-            dvs regnUt(). 
+public class Printer implements StringConstants {
+      
+     /*     printForm will generate the form. . 
+            PS: notice that the form is connected to the Servlet calculate.  
+            PS2: By generating the form in amethod the form can show both input  
+            and results. The methos is called after a calculation.  
      */
      
    
-    public void printForm(PrintWriter out, int v1, int v2,int resultat, String operator)
+    public void printForm(PrintWriter out, int v1, int v2,int result, String operator)
     {
-        skrivHtmlHeader(out, "UiA");
-        out.println("<h1> Calculator from form3 </h1>");
+        printHtmlHeader(out, "UiA");
+        out.println("<h1> Calculator from form </h1>");
         String fn = "\"";
         out.println("<div class= "+fn +"form" +fn +">");
         
-        out.println("<h1> Kalkulator: Oppgi to tall og en operator </h1>");
+        out.println("<h1> Calculator: Give two numbers and an opareator </h1>");
         
         
         out.println("<form action= "+fn +"calculate" +fn +"method=" +fn +"post" +fn +">");
-        out.println("<div class = \"ledetekst\"> Tall1: </div>");
+        out.println("<div class = \"ledetekst\"> Number 1: </div>");
         
-
-//skriver ut ett input felt, angir først div, har og med value. 
-        out.println("<div class = \"inn\"> <input type=\"text\" name = \"tall1\" value = \"");
+        out.println("<div class = \"inn\"> <input type=\"text\" name = \"v1\" value = \"");
         out.println(v1);
         out.println("\"> </div>"); 
         
-        out.println("<div class = \"ledetekst\"> Tall2 </div>");
-        out.println("<div class = \"inn\"> <input type=\"text\" name = \"tall2\" value = \"");  
+        out.println("<div class = \"ledetekst\"> Number 2: </div>");
+        out.println("<div class = \"inn\"> <input type=\"text\" name = \"v2\" value = \"");  
         out.println(v2);
         out.println("\"> </div> <br><br>");
         
-        out.println("<div class = \"resultat\"> <input type=\"text\" name = \"resultat\" value = \"");  
-        out.println(resultat);
+        out.println("<div class = \"resultat\"> <input type=\"text\" name = \"result\" value = \"");  
+        out.println(result);
         out.println("\"> </div>");   
         
         out.println("<div class = \"ledetekst\"> Operator </div>");
@@ -106,11 +88,11 @@ public class toolbox implements StringConstants {
     }
     
     //start
-  public void printForm2(PrintWriter out, int v1, int v2,int resultat, String operator) {
+  public void printForm2(PrintWriter out, int v1, int v2,int result, String operator) {
           
     out.println("<h1> Calculator: Give two numbers and an operator </h1>");
     
-    skrivHtmlHeader(out, "Calculate PrintForm2");
+    printHtmlHeader(out, "Calculate PrintForm2");
     out.format(FORM, "calculate");      
    
      out.format(DIV, "form");
@@ -121,7 +103,7 @@ public class toolbox implements StringConstants {
       out.println ("Number 1: " +"</div>");
         
       out.format(DIV, "inn");
-      out.format(INP, "text", "tall1", v1);
+      out.format(INP, "text", "v1", v1);
       out.println("</div>"); 
         
         // --------------second number ------------------------------- 
@@ -129,7 +111,7 @@ public class toolbox implements StringConstants {
        out.println ("Number 2: " +"</div>");
         
        out.format(DIV, "inn");
-       out.format(INP, "text", "tall2", v2);
+       out.format(INP, "text", "v2", v2);
        out.println("</div>"); 
         
        
@@ -137,7 +119,7 @@ public class toolbox implements StringConstants {
        out.println("<br>");
        out.format(DIV, "resultat");
        
-       out.format(INP, "text", "resultat", resultat);
+       out.format(INP, "text", "result", result);
        out.println("</div>");   
 
         // -------------- Operatorer -------------------------------       
@@ -168,7 +150,7 @@ public class toolbox implements StringConstants {
      }
        
     
-    public void skrivHtmlHeader(PrintWriter out,  String tittel)
+    public void printHtmlHeader(PrintWriter out,  String tittel)
  {
       out.println("<!DOCTYPE html>");
        out.println("<html>");
