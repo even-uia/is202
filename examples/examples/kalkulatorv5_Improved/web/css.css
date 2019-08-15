@@ -36,22 +36,28 @@ form
 {
     background-color: #ffff66;
     color: #ff3333;
+    padding-top: 50px;
 }
 
 div.form {
     background-color: #cccccc;
     color: white;
     border: 1px solid black;
+    padding-top: 50px;
     margin-top: 50px;
     margin-bottom: 50px;
-    margin-right: 150px;
-    margin-left: 180px;
+    margin-right: 50px;
+    margin-left: 50px;
     width: 50%;
     padding: 20px;
 } 
 
 div.ledetekst {
      margin-left: 15px;
+     font-size: 30px;
+     color: red; 
+     font-weight: bold;
+     /* text-shadow: 3px 2px red;  */
     
 } 
 

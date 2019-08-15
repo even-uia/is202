@@ -110,7 +110,7 @@ public class toolbox implements StringConstants {
           
     out.println("<h1> Calculator: Give two numbers and an operator </h1>");
     
-     skrivHtmlHeader(out, "Calculate PrintForm2");
+    skrivHtmlHeader(out, "Calculate PrintForm2");
     out.format(FORM, "calculate");      
    
      out.format(DIV, "form");
@@ -118,17 +118,15 @@ public class toolbox implements StringConstants {
      
         // -------------- first number  ------------------------------ 
       out.format(DIV, "ledetekst");
-      out.println ("Tall 1: " +"</div>");
+      out.println ("Number 1: " +"</div>");
         
-      String v1S;
-      v1S = Integer.toString(v1);
       out.format(DIV, "inn");
-      out.format(INP, "text", "tall1", v1S);
+      out.format(INP, "text", "tall1", v1);
       out.println("</div>"); 
         
         // --------------second number ------------------------------- 
        out.format(DIV, "ledetekst");
-       out.println ("Tall 2: " +"</div>");
+       out.println ("Number 2: " +"</div>");
         
        out.format(DIV, "inn");
        out.format(INP, "text", "tall2", v2);
