@@ -71,6 +71,8 @@ public class DBTool {
          DataSource ds = (DataSource)cont.lookup("java:comp/env/jdbc/localhostDS");  
          //DataSource ds = (DataSource)cont.lookup("jdbc/LocalhostDS");
          conn =  ds.getConnection();
+         out.println(" datasource" +ds);
+         
          return conn; 
  
         }
