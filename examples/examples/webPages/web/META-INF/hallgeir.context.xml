@@ -12,7 +12,7 @@
           password="hallgeir"  
 		 
                 
-	  auth="Container"
+		  auth="Container"
           type="javax.sql.DataSource"
           factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
           testWhileIdle="true"

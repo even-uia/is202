@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context path="/wordPlay6">
-        <!--
-            driverClassName, url username og password er der 
-            vi endrer, resten av context.xml endres ikke. 
-        -->
- <Resource name="jdbc/localhostDS"  
-           
+ <Resource name="jdbc/localhostDS"
+          auth="Container"
+		    
           driverClassName="org.mariadb.jdbc.Driver"
-          url="jdbc:mariadb://localhost:3306/hallgeir"
-		  username="hallgeir"
-          password="hallgeir"  
-		 
-                
-	  auth="Container"
+              url="jdbc:mariadb://localhost:3306/hallgeir"
+		  
           type="javax.sql.DataSource"
           factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
           testWhileIdle="true"
@@ -31,5 +24,8 @@
           minEvictableIdleTimeMillis="30000"
           jmxEnabled="true"
           jdbcInterceptors="org.apache.tomcat.jdbc.pool.interceptor.ConnectionState;
-          org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer"/>   
+            org.apache.tomcat.jdbc.pool.interceptor.StatementFinalizer"
+          username="hallgeir"
+          password="hallgeir"/>
+          
 </Context>
