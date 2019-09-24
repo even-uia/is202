@@ -233,6 +233,45 @@ public class StudentTool implements StringConstants {
          }
          return ny;
     }
+     
+     public void listStudents(PrintWriter out, Connection conn)
+    { 
+               
+        PreparedStatement getStudents; 
+         
+         try {
+                getStudents = conn.prepareStatement("select * from studenthn order by ?");
+                getStudents.setString(1,"firstName");
+                
+                ResultSet rset = getStudents.executeQuery();
+ 
+                // Step 4: Process the ResultSet by scrolling the cursor forward via next().
+                //  For each row, retrieve the contents of the cells with getXxx(columnName).
+                out.println("The records selected are:" +"<br>");
+                int rowCount = 0;
+                out.format(LIST,"alle");
+                
+                while(rset.next()) {   // Move the cursor to the next row, return false if no more row
+                    String firstName = rset.getString("firstName");
+
+                    // out.println(rowCount +": " +snr + " , " + firstName + ", " + lastName +"<br>");
+                    out.format(ENSTUD,firstName,firstName);
+                                      
+                    ++rowCount;
+                 }  // end while
+                 out.println("Total number of records = " + rowCount);
+                 out.format(LISTSLUTT);
+                 // After all students are listed, can create a new student
+                 out.format(FORM, "studentDetail");           
+                 out.format(INPSUB, "Submit","valg", "Ny");
+                 out.println("</form>");
+                 
+         } // end try     
+         catch (SQLException ex) {
+                out.println("Ikke hentet fra DB " +ex);
+         }
+   }
+
     
 }// slutt 
     

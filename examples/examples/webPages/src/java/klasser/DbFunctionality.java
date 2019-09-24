@@ -21,32 +21,7 @@ public class DbFunctionality {
  /*
     Skal liste alle tabeller i databasen vi er logget inn på
  */
-
-    public void showTables(Connection conn, PrintWriter out) { 
-               
-            String strSelect = "SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE='BASE TABLE'";
-            out. println("The SQL query is: " + strSelect+ "<br>");
-            
-            try {
-                stmt = conn.createStatement();
-                ResultSet rset = stmt.executeQuery(strSelect);
  
-                // Step 4: Process the ResultSet by scrolling the cursor forward via next().
-                //  For each row, retrieve the contents of the cells with getXxx(columnName).
-                out.println("The records selected are:" +"<br>");
-                int rowCount = 0;
-                while(rset.next()) {   // Move the cursor to the next row, return false if no more row
-                    String table_Name = rset.getString("TABLE_NAME");
-                    out.println(rowCount +": " + table_Name +"<br>");
-                    ++rowCount;
-                 }  // end while
-                 out.println("Total number of records = " + rowCount);
-         } // end catch     
-         catch (SQLException ex) {
-                out.println("Ikke hentet fra DB " +ex);
-         }    
-}
-    
     /*
         Skal inserte en ny url i tabellen webadresse i databasen. Url som
         settes inn er hentet fra formen.

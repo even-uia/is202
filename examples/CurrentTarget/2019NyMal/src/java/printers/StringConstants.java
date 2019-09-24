@@ -17,5 +17,10 @@ public interface StringConstants {
         String INPREAD = "<input type='%s' & name='%s' & value='%s' size= '%s' readonly>";
         String INPSUB = "<input type='%s' & name='%s' & value='%s'>" +"  ";
         String TABLE = "<table>";
+        
+        
+        String ENSTUD  = "<option value='%s'>'%s'</option>"; 
+        String LIST = "<select name=?>";
+        String LISTSLUTT="</select>";
        
 }
