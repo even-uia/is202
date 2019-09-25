@@ -55,8 +55,10 @@ public class GetStudents extends HttpServlet {
             Connection conn; 
             conn = dbTool.loggInn(out);
             
+            // Innlogget på DB
             studentTool.printStudents(out,conn);
             studentTool.listStudents(out,conn);
+            studentTool.listStudentsLinks(out,conn);
             dbTool.close();
             
             out.println("</body>");

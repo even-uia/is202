@@ -33,8 +33,6 @@ public class StudentTool implements StringConstants {
      
   public void printStudents(PrintWriter out, Connection conn)
     { 
-        String STUDENT  = "<li><a href='studentDetail?snr=%s&firstName=%s&lastName=%s'>%s %s %s</a></li>\n"; 
-         
         PreparedStatement getStudents; 
          
          try {
@@ -272,6 +270,49 @@ public class StudentTool implements StringConstants {
          }
    }
 
-    
+ 
+    public void listStudentsLinks(PrintWriter out, Connection conn)
+    { 
+               
+        PreparedStatement getStudents; 
+         
+         try {
+                getStudents = conn.prepareStatement("select * from studenthn order by ?");
+                getStudents.setString(1,"firstName");
+                
+                ResultSet rset = getStudents.executeQuery();
+ 
+                // Step 4: Process the ResultSet by scrolling the cursor forward via next().
+                //  For each row, retrieve the contents of the cells with getXxx(columnName).
+                out.println("<h1> The records selected are: PS links</h1>" +"<br>");
+                int rowCount = 0;
+                 out.format(LIST,"alle");
+                //out.format(BUTTON,"Studenter");
+                
+                while(rset.next()) {   // Move the cursor to the next row, return false if no more row
+     
+                    String snr = rset.getString("snr");
+                    String firstName = rset.getString("firstName");
+                    String lastName   = rset.getString("lastName");
+
+                   out.format(STUDENTLINK,snr,firstName,lastName,snr,firstName,lastName);
+
+                   // out.format(LINK2,snr,firstName,lastName,snr,firstName,lastName);
+                    ++rowCount;
+                 }  // end while
+                 out.println("Total number of records = " + rowCount);
+                 out.format(LISTSLUTT);
+                 // After all students are listed, can create a new student
+                 out.format(FORM, "studentDetail");           
+                 out.format(INPSUB, "Submit","valg", "Ny");
+                 out.println("</form>");
+                 
+         } // end try     
+         catch (SQLException ex) {
+                out.println("Ikke hentet fra DB " +ex);
+         }
+   }
+
+ 
 }// slutt 
     
