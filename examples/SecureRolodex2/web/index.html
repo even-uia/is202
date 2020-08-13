@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type='text/css' href='rolodex.css'/>
+    <title>Rolodex</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <h1>Using DatabaseRealm in the Rolodex WebApp</h1>
+    <ol>
+      <li>Open Web Pages/META-INF/context.xml (or configuration files/context.xml
+        (it's the same file). Change the Resource definition to match your
+        database (The file is write protected. You should enable writing first).
+        You should also check the Realm definition. The things you can set is 
+        mostly self-explanatory (table and column names).</li>
+      <li>The SQL scripts will create tables that suits the
+        original author (probably me  ;-)<br/>
+        Read the file at least a couple of times, to learn what information
+        you need to set up the database. Then edit the script to suit your 
+        requirements.
+      </li>
+      <li>
+        Run the sql script(s) to create the database tables. Restart tomcat.
+        When tomcat has started again, you can run this application to verify
+        that it works, but you should really take a close look at web.xml
+        before you do. Read the file carefully, with a little effort you will
+        understand how it works.
+      </li>
+      <li>Checklist:
+         <ul>
+       <li>Checking means testing, that is it runs <strong>and produces the correct result</strong>.
+        If you can't test, at least double check spelling of everything that
+        refers to something else (at both ends) and remember: <strong>upper-/lower-case matter!</strong></li>
+          <li>
+          The Datasource is defined in context.xml. Is it correctly configured
+          (you have tested that it works)
+        </li>
+        <li>The realm is correctly configured in context.xml. 
+          The reference to the DataSource is correct. The table and column
+          names are correct</li>
+        <li>The servlet url patterns in the url-pattern tags in web.xml are correct</li>
+        <li>The role names in web.xml are correct</li>
+        <li>You are using the usernames and passwords from the database</li>
+        </ul>
+      </li>
+    </ol>
+    
+    <br/>
+    <h3>Protected servlet links</h3>
+    <p><a href="ShowList">Show contact list</a> if you log in as rolus or
+      roladm. Password is admin</p>
+    
+  </body>
+</html>

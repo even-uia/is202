@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+
+    <session-config>
+        <!-- Sessions will be automatically terminated (i.e. logged out)
+        after 30 minutes of inactivity -->
+        <session-timeout> 30 </session-timeout>
+    </session-config>
+
+
+      <!-- A security constraint is a limit on what the users can do. 
+          The constraint is enforced by tomcat, no programming is needed
+          All necessary info is in this file -->
+    <security-constraint>
+        <!--  to access these pages  -->
+        <web-resource-collection>
+            <web-resource-name>UserResources</web-resource-name>
+            <url-pattern>/ShowContact</url-pattern>
+            <url-pattern>/ShowList</url-pattern>
+        </web-resource-collection>
+        <!--  the user must have one of these roles  -->
+        <auth-constraint>
+            <role-name>RolodexUser</role-name>
+            <role-name>RolodexAdmin</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>AdminResources</web-resource-name>
+            <url-pattern>/AdminDeleteContact</url-pattern>
+            <url-pattern>/AdminSaveContact</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>RolodexAdmin</role-name>
+        </auth-constraint>
+    </security-constraint>
+  
+    <!--  the available roles  -->
+    <security-role>
+        <role-name>RolodexUser</role-name>
+    </security-role>
+    <security-role>
+        <role-name>RolodexAdmin</role-name>
+    </security-role>
+
+    <!-- which realm to use -->
+    <login-config>
+        <auth-method>BASIC</auth-method>
+        <realm-name>DataSourceRealm</realm-name>
+    </login-config>
+
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+</web-app>

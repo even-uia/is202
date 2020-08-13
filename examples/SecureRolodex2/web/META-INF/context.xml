@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/SecureRolodex2">
+    
+  <Resource type="javax.sql.DataSource" name="jdbc/Rolodex"            
+            driverClassName="com.mysql.jdbc.Driver" auth="Container"
+            username="rolodex" password="admin"  
+            url="jdbc:mysql://localhost:3306/rolodex" />
+
+  <Realm className="org.apache.catalina.realm.DataSourceRealm" 
+         dataSourceName="jdbc/Rolodex" localDataSource="true"
+         userTable="users"  userNameCol="username" userCredCol="password"
+         userRoleTable="roles" roleNameCol="rolename" />
+</Context>
